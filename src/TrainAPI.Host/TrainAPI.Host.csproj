@@ -1,0 +1,35 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net8.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <InvariantGlobalization>true</InvariantGlobalization>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+      <UserSecretsId>2cb3d7a9-3d53-481f-99c5-6a6a19943af4</UserSecretsId>
+  </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ErrorOr" Version="1.9.0" />
+        <PackageReference Include="FluentValidation" Version="11.9.0" />
+        <PackageReference Include="FluentValidation.DependencyInjectionExtensions" Version="11.9.0" />
+        <PackageReference Include="MediatR" Version="12.2.0" />
+        <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.0" />
+        <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
+        <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+        <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="8.0.0" />
+        <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="8.0.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\TrainAPI.Application\TrainAPI.Application.csproj" />
+      <ProjectReference Include="..\TrainAPI.Domain\TrainAPI.Domain.csproj" />
+      <ProjectReference Include="..\TrainAPI.Infrastructure\TrainAPI.Infrastructure.csproj" />
+    </ItemGroup>
+
+</Project>
