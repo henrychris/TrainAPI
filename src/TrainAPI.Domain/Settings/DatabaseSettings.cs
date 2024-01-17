@@ -1,5 +1,5 @@
 
-namespace TrainAPI.Host.Settings
+namespace TrainAPI.Domain.Settings
 {
     public class DatabaseSettings
     {

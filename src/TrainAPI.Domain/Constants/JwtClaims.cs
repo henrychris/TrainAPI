@@ -7,6 +7,8 @@ namespace TrainAPI.Domain.Constants
 {
     public class JwtClaims
     {
-        public const string Role = nameof(Role);
+        public const string EMAIL = nameof(EMAIL);
+        public const string USER_ID = nameof(USER_ID);
+        public const string ROLE = nameof(ROLE);
     }
 }

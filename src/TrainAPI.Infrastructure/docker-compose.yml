@@ -1,6 +1,6 @@
 services:
   database:
-    image: "postgres:11.22-bullseye"
+    image: "postgres:16.1"
     container_name: database
     ports:
       - "5432:5432"

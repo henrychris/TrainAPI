@@ -4,11 +4,11 @@ namespace TrainAPI.Host.Configuration;
 
 public static class MiddlewareConfig
 {
-    public static void AddCore(this WebApplication app)
+    public static async Task AddCore(this WebApplication app)
     {
         app.RegisterSwagger();
         app.RegisterMiddleware();
-        app.SeedDatabase();
+        await app.SeedDatabase();
     }
 
     private static void RegisterSwagger(this WebApplication app)

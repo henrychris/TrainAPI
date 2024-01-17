@@ -47,7 +47,7 @@ public class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddlewa
 
         var errors = new List<ApiError>
         {
-            new() { Code = "System.Error", Description = "Something went wrong. Please reach out to an admin." }
+            new() { Code = "System.InternalError", Description = "Something went wrong. Please reach out to an admin." }
         };
 
         var response = new ApiErrorResponse(errors, "Something went wrong. Please reach out to an admin.");

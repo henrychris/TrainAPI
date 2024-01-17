@@ -11,4 +11,10 @@
         <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Reference Include="ErrorOr">
+        <HintPath>..\..\..\..\..\.nuget\packages\erroror\1.9.0\lib\net6.0\ErrorOr.dll</HintPath>
+      </Reference>
+    </ItemGroup>
+
 </Project>

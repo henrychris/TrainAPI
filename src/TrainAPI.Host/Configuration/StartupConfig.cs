@@ -11,9 +11,10 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
+using TrainAPI.Application.Features.Auth.Login;
 using TrainAPI.Domain.Constants;
 using TrainAPI.Domain.Entities;
-using TrainAPI.Host.Settings;
+using TrainAPI.Domain.Settings;
 using TrainAPI.Infrastructure.Data;
 using TrainAPI.Infrastructure.Filters;
 
@@ -53,6 +54,7 @@ public static class StartupConfig
         Console.WriteLine($"{configuration.AsEnumerable().Count()} secrets retrieved.");
 
         ConfigureSettings<DatabaseSettings>(services, configuration);
+        ConfigureSettings<JwtSettings>(services, configuration);
         Console.WriteLine("Secrets have been bound to classes.");
     }
 
@@ -73,12 +75,12 @@ public static class StartupConfig
         services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1",
-                               new OpenApiInfo
-                               {
-                                   Version = "v1",
-                                   Title = "Train API",
-                                   Description = "An application used to manage trains at a station. Set schedules, sell tickets."
-                               });
+                new OpenApiInfo
+                {
+                    Version = "v1",
+                    Title = "Train API",
+                    Description = "An application used to manage trains at a station. Set schedules, sell tickets."
+                });
 
             options.AddSecurityDefinition(SECURITY_SCHEME, new OpenApiSecurityScheme
             {
@@ -100,22 +102,22 @@ public static class StartupConfig
     private static void SetupMsIdentity(this IServiceCollection services)
     {
         services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                // Password settings
-                options.Password.RequireDigit = true;
-                options.Password.RequireUppercase = true;
-                options.Password.RequireNonAlphanumeric = true;
-                options.Password.RequiredLength = 6;
+                {
+                    // Password settings
+                    options.Password.RequireDigit = true;
+                    options.Password.RequireUppercase = true;
+                    options.Password.RequireNonAlphanumeric = true;
+                    options.Password.RequiredLength = 6;
 
-                // Lockout settings.
-                options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
-                options.Lockout.MaxFailedAccessAttempts = 3;
-                options.Lockout.AllowedForNewUsers = true;
+                    // Lockout settings.
+                    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(2);
+                    options.Lockout.MaxFailedAccessAttempts = 3;
+                    options.Lockout.AllowedForNewUsers = true;
 
-                options.User.RequireUniqueEmail = true;
-                // options.SignIn.RequireConfirmedEmail = true;
-            }).AddEntityFrameworkStores<DataContext>()
-            .AddDefaultTokenProviders();
+                    options.User.RequireUniqueEmail = true;
+                    // options.SignIn.RequireConfirmedEmail = true;
+                }).AddEntityFrameworkStores<DataContext>()
+                .AddDefaultTokenProviders();
 
         // generated tokens will only last 2 hours.
         services.Configure<DataProtectionTokenProviderOptions>(opt =>
@@ -128,29 +130,29 @@ public static class StartupConfig
         var jwtSettings = scope.ServiceProvider.GetRequiredService<IOptionsSnapshot<JwtSettings>>().Value;
 
         services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(
-                x =>
                 {
-                    x.TokenValidationParameters = new TokenValidationParameters
+                    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                    options.DefaultSignInScheme = JwtBearerDefaults.AuthenticationScheme;
+                })
+                .AddJwtBearer(
+                    x =>
                     {
-                        ValidAudience = jwtSettings.Audience ??
-                                        throw new InvalidOperationException("Audience is null!"),
-                        ValidIssuer = jwtSettings.Issuer ??
-                                      throw new InvalidOperationException("Security Key is null!"),
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey ??
-                            throw new InvalidOperationException("Security Key is null!"))),
-                        ValidateAudience = true,
-                        ValidateIssuer = true,
-                        ValidateLifetime = true,
-                        ValidateIssuerSigningKey = true,
-                        RoleClaimType = JwtClaims.Role
-                    };
-                });
+                        x.TokenValidationParameters = new TokenValidationParameters
+                        {
+                            ValidAudience = jwtSettings.Audience ??
+                                            throw new InvalidOperationException("Audience is null!"),
+                            ValidIssuer = jwtSettings.Issuer ??
+                                          throw new InvalidOperationException("Security Key is null!"),
+                            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.SecretKey ??
+                                throw new InvalidOperationException("Security Key is null!"))),
+                            ValidateAudience = true,
+                            ValidateIssuer = true,
+                            ValidateLifetime = true,
+                            ValidateIssuerSigningKey = true,
+                            RoleClaimType = JwtClaims.ROLE
+                        };
+                    });
         services.AddAuthorization();
     }
 
@@ -175,7 +177,7 @@ public static class StartupConfig
 
     private static void AddFeatures(this IServiceCollection services)
     {
-        var assemblyToScan = typeof(Program).Assembly;
+        var assemblyToScan = typeof(LoginRequest).Assembly;
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assemblyToScan));
         services.AddValidatorsFromAssembly(assemblyToScan);
     }
