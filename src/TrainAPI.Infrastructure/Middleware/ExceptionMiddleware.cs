@@ -1,6 +1,6 @@
 using System.Net;
 
-using TrainAPI.Domain.ApiResponses;
+using TrainAPI.Application.ApiResponses;
 
 namespace TrainAPI.Infrastructure.Middleware;
 

@@ -1,6 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 
-namespace TrainAPI.Domain.ApiResponses;
+namespace TrainAPI.Application.ApiResponses;
 
 public class PagedResponse<T>
 {

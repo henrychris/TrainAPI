@@ -2,7 +2,7 @@ using ErrorOr;
 
 using FluentValidation.Results;
 
-using TrainAPI.Domain.ApiResponses;
+using TrainAPI.Application.ApiResponses;
 
 namespace TrainAPI.Application.Extensions;
 

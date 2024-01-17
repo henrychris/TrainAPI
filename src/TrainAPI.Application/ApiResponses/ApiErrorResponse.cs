@@ -1,18 +1,17 @@
 using System.Text.Json;
 
-namespace TrainAPI.Domain.ApiResponses;
+namespace TrainAPI.Application.ApiResponses;
 
-public class ApiResponse<T>(T? data, string message, bool success)
+public class ApiErrorResponse(List<ApiError> errors, string message)
 {
     private readonly JsonSerializerOptions _jsonSerializerOptions = new()
     {
         WriteIndented = true
     };
 
-    public bool Success { get; init; } = success;
+    public bool Success { get; init; }
     public string Message { get; init; } = message;
-    public string Note { get; init; } = "N/A";
-    public T? Data { get; init; } = data;
+    public List<ApiError> Errors { get; init; } = errors;
 
     public string ToJsonString()
     {

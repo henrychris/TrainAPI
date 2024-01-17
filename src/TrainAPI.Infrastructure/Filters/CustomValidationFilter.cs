@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Filters;
 
-using TrainAPI.Domain.ApiResponses;
+using TrainAPI.Application.ApiResponses;
 
 namespace TrainAPI.Infrastructure.Filters;
 
