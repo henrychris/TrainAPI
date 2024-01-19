@@ -11,12 +11,15 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 
+using TrainAPI.Application.Contracts;
 using TrainAPI.Application.Features.Auth.Login;
+using TrainAPI.Application.Interfaces;
 using TrainAPI.Domain.Constants;
 using TrainAPI.Domain.Entities;
 using TrainAPI.Domain.Settings;
 using TrainAPI.Infrastructure.Data;
 using TrainAPI.Infrastructure.Filters;
+using TrainAPI.Infrastructure.Services;
 
 namespace TrainAPI.Host.Configuration;
 
@@ -158,7 +161,8 @@ public static class StartupConfig
 
     private static void RegisterServices(this IServiceCollection services)
     {
-        // services.AddScoped<ICurrentUser, CurrentUser>();
+        services.AddScoped<ICurrentUser, CurrentUser>();
+        services.AddScoped<IStationService, StationService>();
         services.AddSingleton(TimeProvider.System);
     }
 

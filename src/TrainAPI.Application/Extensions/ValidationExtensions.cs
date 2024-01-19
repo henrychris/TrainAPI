@@ -13,7 +13,7 @@ public static class ValidationExtensions
             .NotEmpty()
             .WithMessage(SharedErrors<T>.MissingName.Description)
             .WithErrorCode(SharedErrors<T>.MissingName.Code)
-            .Length(DomainConstants.MinNameLength, DomainConstants.MaxNameLength)
+            .Length(DomainConstants.MIN_NAME_LENGTH, DomainConstants.MAX_NAME_LENGTH)
             .WithMessage(SharedErrors<T>.InvalidName.Description)
             .WithErrorCode(SharedErrors<T>.InvalidName.Code);
     }
@@ -24,7 +24,7 @@ public static class ValidationExtensions
             .NotEmpty()
             .WithMessage(SharedErrors<T>.MissingFirstName.Description)
             .WithErrorCode(SharedErrors<T>.MissingFirstName.Code)
-            .Length(DomainConstants.MinNameLength, DomainConstants.MaxNameLength)
+            .Length(DomainConstants.MIN_NAME_LENGTH, DomainConstants.MAX_NAME_LENGTH)
             .WithMessage(SharedErrors<T>.InvalidFirstName.Description)
             .WithErrorCode(SharedErrors<T>.InvalidFirstName.Code);
     }
@@ -35,7 +35,7 @@ public static class ValidationExtensions
             .NotEmpty()
             .WithMessage(SharedErrors<T>.MissingLastName.Description)
             .WithErrorCode(SharedErrors<T>.MissingLastName.Code)
-            .Length(DomainConstants.MinNameLength, DomainConstants.MaxNameLength)
+            .Length(DomainConstants.MIN_NAME_LENGTH, DomainConstants.MAX_NAME_LENGTH)
             .WithMessage(SharedErrors<T>.InvalidLastName.Description)
             .WithErrorCode(SharedErrors<T>.InvalidLastName.Code);
     }
@@ -49,5 +49,15 @@ public static class ValidationExtensions
             .EmailAddress()
             .WithMessage(SharedErrors<T>.InvalidEmailAddress.Description)
             .WithErrorCode(SharedErrors<T>.InvalidEmailAddress.Code);
+    }
+
+    public static void ValidateStationCode<T>(this IRuleBuilder<T, string> ruleBuilder)
+    {
+        ruleBuilder.NotEmpty()
+            .WithMessage(Errors.Station.MissingCode.Description)
+            .WithErrorCode(Errors.Station.MissingCode.Code)
+            .Length(DomainConstants.MIN_CODE_LENGTH, DomainConstants.MAX_CODE_LENGTH)
+            .WithMessage(Errors.Station.InvalidCode.Description)
+            .WithErrorCode(Errors.Station.InvalidCode.Code);
     }
 }

@@ -16,8 +16,8 @@ public static class SharedErrors<T>
 
     public static Error InvalidName => Error.Validation(
         code: $"{typeof(T).Name}.InvalidName",
-        description: $"{typeof(T).Name} name must be at least {DomainConstants.MinNameLength}" +
-                     $" characters long and at most {DomainConstants.MaxNameLength} characters long.");
+        description: $"{typeof(T).Name} name must be at least {DomainConstants.MIN_NAME_LENGTH}" +
+                     $" characters long and at most {DomainConstants.MAX_NAME_LENGTH} characters long.");
 
     public static Error MissingFirstName => Error.Validation(
         code: $"{typeof(T).Name}.MissingFirstName",
@@ -25,13 +25,13 @@ public static class SharedErrors<T>
 
     public static Error InvalidFirstName => Error.Validation(
         code: $"{typeof(T).Name}.InvalidFirstName",
-        description: $"First name must be at least {DomainConstants.MinNameLength}" +
-                     $" characters long and at most {DomainConstants.MaxNameLength} characters long.");
+        description: $"First name must be at least {DomainConstants.MIN_NAME_LENGTH}" +
+                     $" characters long and at most {DomainConstants.MAX_NAME_LENGTH} characters long.");
 
     public static Error InvalidLastName => Error.Validation(
         code: $"{typeof(T).Name}.InvalidLastName",
-        description: $"Last name must be at least {DomainConstants.MinNameLength}" +
-                     $" characters long and at most {DomainConstants.MaxNameLength} characters long.");
+        description: $"Last name must be at least {DomainConstants.MIN_NAME_LENGTH}" +
+                     $" characters long and at most {DomainConstants.MAX_NAME_LENGTH} characters long.");
 
     public static Error MissingLastName => Error.Validation(
         code: $"{typeof(T).Name}.MissingLastName",
