@@ -58,7 +58,7 @@ public class StationsController(IMediator mediator) : BaseController
     {
         var result = await mediator.Send(new UpdateStationRequest
         {
-            StationId = id, Code = request.Code, Name = request.Code
+            StationId = id, Code = request.Code, Name = request.Name
         });
         return result.Match(_ => NoContent(), ReturnErrorResponse);
     }
