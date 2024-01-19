@@ -10,6 +10,7 @@ using NUnit.Framework;
 using TrainAPI.Application.ApiResponses;
 using TrainAPI.Application.Features.Auth;
 using TrainAPI.Application.Features.Auth.Register;
+using TrainAPI.Application.Features.Stations.CreateStation;
 using TrainAPI.Domain.Constants;
 using TrainAPI.Host;
 using TrainAPI.Infrastructure.Data;
@@ -75,5 +76,12 @@ public class IntegrationTest
 
         var result = await registerResponse.Content.ReadFromJsonAsync<ApiResponse<UserAuthResponse>>();
         return result;
+    }
+
+    protected async Task<CreateStationResponse> CreateStation(CreateStationRequest request)
+    {
+        var act = await TestClient.PostAsJsonAsync("Stations", request);
+        var response = await act.Content.ReadFromJsonAsync<ApiResponse<CreateStationResponse>>();
+        return response!.Data!;
     }
 }
