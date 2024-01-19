@@ -44,7 +44,7 @@ public class UpdateStationRequestHandler(
         var station = await stationService.GetStation(request.StationId);
         if (station is null)
         {
-            logger.LogInformation("Station not found. ID: {0}", request.StationId);
+            logger.LogInformation("Station not found. ID: {id}", request.StationId);
             return SharedErrors<Station>.NotFound;
         }
 

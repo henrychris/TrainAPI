@@ -163,6 +163,7 @@ public static class StartupConfig
     {
         services.AddScoped<ICurrentUser, CurrentUser>();
         services.AddScoped<IStationService, StationService>();
+        services.AddScoped<ITrainService, TrainService>();
         services.AddSingleton(TimeProvider.System);
     }
 

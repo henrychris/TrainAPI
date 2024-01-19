@@ -11,6 +11,7 @@ using TrainAPI.Application.ApiResponses;
 using TrainAPI.Application.Features.Auth;
 using TrainAPI.Application.Features.Auth.Register;
 using TrainAPI.Application.Features.Stations.CreateStation;
+using TrainAPI.Application.Features.Trains.CreateTrain;
 using TrainAPI.Domain.Constants;
 using TrainAPI.Host;
 using TrainAPI.Infrastructure.Data;
@@ -82,6 +83,13 @@ public class IntegrationTest
     {
         var act = await TestClient.PostAsJsonAsync("Stations", request);
         var response = await act.Content.ReadFromJsonAsync<ApiResponse<CreateStationResponse>>();
+        return response!.Data!;
+    }
+
+    protected async Task<CreateTrainResponse> CreateTrain(CreateTrainRequest request)
+    {
+        var act = await TestClient.PostAsJsonAsync("Trains", request);
+        var response = await act.Content.ReadFromJsonAsync<ApiResponse<CreateTrainResponse>>();
         return response!.Data!;
     }
 }

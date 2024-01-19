@@ -16,6 +16,6 @@ public static class DomainConstants
     public const int MAX_JSON_LENGTH = 450;
     public const int MAX_ENUM_LENGTH = 20;
 
-    public const int MIN_CODE_LENGTH = 1;
-    public const int MAX_CODE_LENGTH = 3;
+    public const int MIN_STATION_CODE_LENGTH = 1;
+    public const int MAX_STATION_CODE_LENGTH = 3;
 }

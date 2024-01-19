@@ -4,6 +4,6 @@ namespace TrainAPI.Domain.Entities
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public required string Name { get; set; }
-        public required string Code { get; set; }
+        public required string Code { get; set; } // todo: prevent duplicates
     }
 }

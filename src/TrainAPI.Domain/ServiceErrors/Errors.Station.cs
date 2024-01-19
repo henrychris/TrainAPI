@@ -14,6 +14,6 @@ public static partial class Errors
 
         public static Error InvalidCode => Error.Unauthorized(
             code: "Station.InvalidCode",
-            description: $"The code should be {DomainConstants.MAX_CODE_LENGTH} characters long.");
+            description: $"The code should be {DomainConstants.MAX_STATION_CODE_LENGTH} characters long.");
     }
 }

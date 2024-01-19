@@ -56,7 +56,7 @@ public static class ValidationExtensions
         ruleBuilder.NotEmpty()
             .WithMessage(Errors.Station.MissingCode.Description)
             .WithErrorCode(Errors.Station.MissingCode.Code)
-            .Length(DomainConstants.MIN_CODE_LENGTH, DomainConstants.MAX_CODE_LENGTH)
+            .Length(DomainConstants.MIN_STATION_CODE_LENGTH, DomainConstants.MAX_STATION_CODE_LENGTH)
             .WithMessage(Errors.Station.InvalidCode.Description)
             .WithErrorCode(Errors.Station.InvalidCode.Code);
     }

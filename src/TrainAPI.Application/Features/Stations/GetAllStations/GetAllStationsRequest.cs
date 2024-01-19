@@ -38,12 +38,12 @@ public class GetAllStationsRequestHandler(IStationService stationService, ILogge
     {
         if (!string.IsNullOrWhiteSpace(request.Name))
         {
-            query = query.Where(x => x.Name.Contains(request.Name));
+            query = query.Where(x => x.Name.Contains(request.Name, StringComparison.CurrentCultureIgnoreCase));
         }
 
         if (!string.IsNullOrWhiteSpace(request.Code))
         {
-            query = query.Where(x => x.Code.Contains(request.Code));
+            query = query.Where(x => x.Code.Contains(request.Code, StringComparison.CurrentCultureIgnoreCase));
         }
 
         return query;
