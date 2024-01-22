@@ -13,7 +13,6 @@ using Microsoft.OpenApi.Models;
 
 using TrainAPI.Application.Contracts;
 using TrainAPI.Application.Features.Auth.Login;
-using TrainAPI.Application.Interfaces;
 using TrainAPI.Domain.Constants;
 using TrainAPI.Domain.Entities;
 using TrainAPI.Domain.Settings;
@@ -164,6 +163,7 @@ public static class StartupConfig
         services.AddScoped<ICurrentUser, CurrentUser>();
         services.AddScoped<IStationService, StationService>();
         services.AddScoped<ITrainService, TrainService>();
+        services.AddScoped<ITripService, TripService>();
         services.AddSingleton(TimeProvider.System);
     }
 
