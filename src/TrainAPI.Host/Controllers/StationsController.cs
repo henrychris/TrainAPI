@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using TrainAPI.Application.ApiResponses;
 using TrainAPI.Application.Extensions;
+using TrainAPI.Application.Features.Stations;
 using TrainAPI.Application.Features.Stations.CreateStation;
 using TrainAPI.Application.Features.Stations.DeleteStation;
 using TrainAPI.Application.Features.Stations.GetAllStations;
@@ -56,10 +57,7 @@ public class StationsController(IMediator mediator) : BaseController
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
     public async Task<IActionResult> UpdateStation(string id, [FromBody] UpdateStationRequestDto request)
     {
-        var result = await mediator.Send(new UpdateStationRequest
-        {
-            StationId = id, Code = request.Code, Name = request.Name
-        });
+        var result = await mediator.Send(StationMapper.ToUpdateStationRequest(request, id));
         return result.Match(_ => NoContent(), ReturnErrorResponse);
     }
 

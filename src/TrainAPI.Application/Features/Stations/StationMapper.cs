@@ -1,5 +1,6 @@
 using TrainAPI.Application.Features.Stations.CreateStation;
 using TrainAPI.Application.Features.Stations.GetStation;
+using TrainAPI.Application.Features.Stations.UpdateStation;
 using TrainAPI.Domain.Entities;
 
 namespace TrainAPI.Application.Features.Stations;
@@ -19,5 +20,15 @@ public static class StationMapper
     public static GetStationResponse ToGetStationResponse(Station station)
     {
         return new GetStationResponse { Id = station.Id, Code = station.Code, Name = station.Name };
+    }
+
+    public static UpdateStationRequest ToUpdateStationRequest(UpdateStationRequestDto requestDto, string stationId)
+    {
+        return new UpdateStationRequest
+        {
+            StationId = stationId,
+            Code = requestDto.Code,
+            Name = requestDto.Name
+        };
     }
 }

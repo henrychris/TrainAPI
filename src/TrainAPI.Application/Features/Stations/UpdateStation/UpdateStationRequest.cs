@@ -19,9 +19,9 @@ public class UpdateStationRequestDto
 
 public class UpdateStationRequest : IRequest<ErrorOr<Updated>>
 {
-    public string StationId { get; set; } = string.Empty;
-    public string? Name { get; set; }
-    public string? Code { get; set; }
+    public required string StationId { get; init; }
+    public string? Name { get; init; }
+    public string? Code { get; init; }
 }
 
 public class UpdateStationRequestHandler(
@@ -36,7 +36,7 @@ public class UpdateStationRequestHandler(
         if (!validationResult.IsValid)
         {
             var errors = validationResult.ToErrorList();
-            logger.LogInformation("Validation failed for {request}. Errors: {errors}", nameof(UpdateStationRequest),
+            logger.LogError("Validation failed for {request}. Errors: {errors}", nameof(UpdateStationRequest),
                 errors);
             return errors;
         }
@@ -44,7 +44,7 @@ public class UpdateStationRequestHandler(
         var station = await stationService.GetStation(request.StationId);
         if (station is null)
         {
-            logger.LogInformation("Station not found. ID: {id}", request.StationId);
+            logger.LogError("Station not found. ID: {id}", request.StationId);
             return SharedErrors<Station>.NotFound;
         }
 
