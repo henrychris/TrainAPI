@@ -1,4 +1,4 @@
-using TrainAPI.Application.Interfaces;
+using TrainAPI.Application.Contracts;
 using TrainAPI.Domain.Constants;
 
 namespace TrainAPI.Infrastructure.Services;

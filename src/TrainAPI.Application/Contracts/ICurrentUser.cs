@@ -1,4 +1,4 @@
-namespace TrainAPI.Application.Interfaces;
+namespace TrainAPI.Application.Contracts;
 
 public interface ICurrentUser
 {
