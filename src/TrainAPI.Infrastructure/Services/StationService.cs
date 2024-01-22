@@ -33,4 +33,12 @@ public class StationService(DataContext context) : IStationService
     {
         return context.Stations.AsQueryable();
     }
+
+    public async Task<(bool fromStationExists, bool toStationExists)> DoStationsExist(string fromStationId, string toStationId)
+    {
+        var fromStationExists = await context.Stations.FindAsync(fromStationId) is null;
+        var toStationExists = await context.Stations.FindAsync(toStationId) is null;
+
+        return (fromStationExists, toStationExists);
+    }
 }

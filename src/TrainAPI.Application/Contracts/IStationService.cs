@@ -9,4 +9,5 @@ public interface IStationService
     Task UpdateStation(Station station);
     Task DeleteStation(Station station);
     IQueryable<Station> GetQueryable();
+    Task<(bool fromStationExists, bool toStationExists)> DoStationsExist(string fromStationId, string toStationId);
 }
