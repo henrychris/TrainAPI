@@ -36,7 +36,7 @@ public class UpdateTrainRequestHandler(
         if (!validationResult.IsValid)
         {
             var errors = validationResult.ToErrorList();
-            logger.LogInformation("Validation failed for {request}. Errors: {errors}", nameof(UpdateTrainRequest),
+            logger.LogError("Validation failed for {request}. Errors: {errors}", nameof(UpdateTrainRequest),
                 errors);
             return errors;
         }
@@ -44,7 +44,7 @@ public class UpdateTrainRequestHandler(
         var train = await trainService.GetTrain(request.TrainId);
         if (train is null)
         {
-            logger.LogInformation("Train not found. ID: {id}", request.TrainId);
+            logger.LogError("Train not found. ID: {id}", request.TrainId);
             return SharedErrors<Train>.NotFound;
         }
 

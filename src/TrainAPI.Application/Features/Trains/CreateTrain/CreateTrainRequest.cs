@@ -28,7 +28,7 @@ public class CreateTrainRequestHandler(
         if (!validationResult.IsValid)
         {
             var errors = validationResult.ToErrorList();
-            logger.LogInformation("Validation failed for {request}. Errors: {errors}", nameof(CreateTrainRequest),
+            logger.LogError("Validation failed for {request}. Errors: {errors}", nameof(CreateTrainRequest),
                 errors);
             return errors;
         }

@@ -29,12 +29,12 @@ public class CreateStationRequestHandler(
         if (!validationResult.IsValid)
         {
             var errors = validationResult.ToErrorList();
-            logger.LogInformation("Validation failed for {request}. Errors: {errors}", nameof(CreateStationRequest),
+            logger.LogError("Validation failed for {request}. Errors: {errors}", nameof(CreateStationRequest),
                 errors);
             return errors;
         }
 
-        Station station = StationMapper.CreateStation(request);
+        var station = StationMapper.CreateStation(request);
         await stationService.CreateStation(station);
 
         logger.LogInformation("Station Created. Id: {id}", station.Id);
