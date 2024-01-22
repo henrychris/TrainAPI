@@ -1,6 +1,7 @@
 using FluentValidation;
 
 using TrainAPI.Domain.Constants;
+using TrainAPI.Domain.Entities;
 using TrainAPI.Domain.ServiceErrors;
 
 namespace TrainAPI.Application.Extensions;
@@ -54,10 +55,10 @@ public static class ValidationExtensions
     public static void ValidateStationCode<T>(this IRuleBuilder<T, string> ruleBuilder)
     {
         ruleBuilder.NotEmpty()
-            .WithMessage(Errors.Station.MissingCode.Description)
-            .WithErrorCode(Errors.Station.MissingCode.Code)
-            .Length(DomainConstants.MIN_STATION_CODE_LENGTH, DomainConstants.MAX_STATION_CODE_LENGTH)
-            .WithMessage(Errors.Station.InvalidCode.Description)
-            .WithErrorCode(Errors.Station.InvalidCode.Code);
+                   .WithMessage(Errors.Station.MissingCode.Description)
+                   .WithErrorCode(Errors.Station.MissingCode.Code)
+                   .Length(DomainConstants.MIN_STATION_CODE_LENGTH, DomainConstants.MAX_STATION_CODE_LENGTH)
+                   .WithMessage(Errors.Station.InvalidCode.Description)
+                   .WithErrorCode(Errors.Station.InvalidCode.Code);
     }
 }
