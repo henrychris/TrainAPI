@@ -52,7 +52,7 @@ public class TrainControllerTests : IntegrationTest
         await AuthenticateAsync(Roles.ADMIN);
 
         // Act
-        var act = await TestClient.PutAsJsonAsync($"Trains/id", new UpdateTrainRequest());
+        var act = await TestClient.PutAsJsonAsync($"Trains/id", new UpdateTrainRequest { TrainId = "" });
         var response = await act.Content.ReadFromJsonAsync<ApiErrorResponse>();
 
         // Assert
