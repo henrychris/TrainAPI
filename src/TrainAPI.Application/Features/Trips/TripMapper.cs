@@ -1,5 +1,3 @@
-using ErrorOr;
-
 using TrainAPI.Application.Features.Trips.CreateTrip;
 using TrainAPI.Application.Features.Trips.GetSingleTrip;
 using TrainAPI.Application.Features.Trips.UpdateTrip;

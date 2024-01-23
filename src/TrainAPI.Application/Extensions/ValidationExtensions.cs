@@ -1,7 +1,6 @@
 using FluentValidation;
 
 using TrainAPI.Domain.Constants;
-using TrainAPI.Domain.Entities;
 using TrainAPI.Domain.ServiceErrors;
 
 namespace TrainAPI.Application.Extensions;

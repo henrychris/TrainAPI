@@ -6,7 +6,6 @@ using MediatR;
 
 using TrainAPI.Application.Contracts;
 using TrainAPI.Application.Extensions;
-using TrainAPI.Domain.Entities;
 
 namespace TrainAPI.Application.Features.Stations.CreateStation;
 
