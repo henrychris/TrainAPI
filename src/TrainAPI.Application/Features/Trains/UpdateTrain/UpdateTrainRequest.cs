@@ -19,7 +19,7 @@ public class UpdateTrainRequestDto
 
 public class UpdateTrainRequest : IRequest<ErrorOr<Updated>>
 {
-    public string TrainId { get; set; } = string.Empty;
+    public required string TrainId { get; set; }
     public string? Name { get; set; }
     public string? Code { get; set; }
 }

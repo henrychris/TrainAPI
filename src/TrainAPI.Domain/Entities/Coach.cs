@@ -1,6 +1,6 @@
 namespace TrainAPI.Domain.Entities
 {
-    public class Coach
+public class Coach
     {
         public string Id { get; set; } = Guid.NewGuid().ToString();
 

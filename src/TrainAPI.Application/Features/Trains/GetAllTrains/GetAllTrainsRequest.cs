@@ -36,12 +36,12 @@ public class GetAllTrainsRequestHandler(ITrainService trainService, ILogger<GetA
 
     private static IQueryable<Train> ApplyFilters(IQueryable<Train> query, GetAllTrainsRequest request)
     {
-        if (!string.IsNullOrWhiteSpace(request.Name))
+        if (!string.IsNullOrEmpty(request.Name))
         {
             query = query.Where(x => x.Name.Contains(request.Name, StringComparison.CurrentCultureIgnoreCase));
         }
 
-        if (!string.IsNullOrWhiteSpace(request.Code))
+        if (!string.IsNullOrEmpty(request.Code))
         {
             query = query.Where(x => x.Code.Contains(request.Code, StringComparison.CurrentCultureIgnoreCase));
         }
