@@ -12,7 +12,7 @@ public static class TripMapper
         return new Trip
         {
             Name = request.Name,
-            Date = request.DateOfTrip,
+            DateOfTrip = request.DateOfTrip,
             ArrivalTime = request.ArrivalTime,
             DepartureTime = request.DepartureTime,
             TrainId = request.TrainId,
@@ -32,7 +32,7 @@ public static class TripMapper
         return new GetTripResponse
         {
             Name = trip.Name,
-            DateOfTrip = trip.Date,
+            DateOfTrip = trip.DateOfTrip,
             ArrivalTime = trip.ArrivalTime,
             DepartureTime = trip.DepartureTime,
             DistanceInKilometers = trip.DistanceInKilometers,

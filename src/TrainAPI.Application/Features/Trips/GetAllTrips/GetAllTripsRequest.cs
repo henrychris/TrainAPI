@@ -1,6 +1,6 @@
-using MediatR;
-
 using ErrorOr;
+
+using MediatR;
 
 using TrainAPI.Application.ApiResponses;
 using TrainAPI.Application.Contracts;
@@ -46,7 +46,7 @@ public class GetAllTripsRequestHandler(ITripService tripService, ILogger<GetAllT
         if (request.DateOfTrip is not null)
         {
             // get the trips that are on the same day
-            query = query.Where(x => request.DateOfTrip.Value.Day == x.Date.Day);
+            query = query.Where(x => request.DateOfTrip.Value.Day == x.DateOfTrip.Day);
         }
 
         query = query.Where(x => x.FromStationId == request.FromStationId && x.ToStationId == request.ToStationId);

@@ -61,7 +61,7 @@ public class UpdateTripRequestHandler(
         }
 
         trip.Name = request.Name ?? trip.Name;
-        trip.Date = request.DateOfTrip ?? trip.Date;
+        trip.DateOfTrip = request.DateOfTrip ?? trip.DateOfTrip;
         trip.ArrivalTime = request.ArrivalTime ?? trip.ArrivalTime;
         trip.DepartureTime = request.DepartureTime ?? trip.DepartureTime;
         trip.TrainId = request.TrainId ?? trip.TrainId;
