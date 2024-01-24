@@ -1,8 +1,8 @@
-using MediatR;
-
 using ErrorOr;
 
 using FluentValidation;
+
+using MediatR;
 
 using TrainAPI.Application.Contracts;
 using TrainAPI.Application.Extensions;

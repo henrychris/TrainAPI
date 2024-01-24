@@ -1,6 +1,6 @@
-using MediatR;
-
 using ErrorOr;
+
+using MediatR;
 
 using TrainAPI.Application.Contracts;
 using TrainAPI.Domain.Entities;

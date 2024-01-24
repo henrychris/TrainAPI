@@ -2,6 +2,8 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
 
+using ErrorOr;
+
 using FluentValidation;
 
 using MediatR;
@@ -15,8 +17,6 @@ using TrainAPI.Domain.Constants;
 using TrainAPI.Domain.Entities;
 using TrainAPI.Domain.ServiceErrors;
 using TrainAPI.Domain.Settings;
-
-using ErrorOr;
 
 namespace TrainAPI.Application.Features.Auth.Register;
 
