@@ -5,7 +5,7 @@ namespace TrainAPI.Domain.Entities
         // todo: there should be a feature to set recurring trips
         public string Id { get; set; } = Guid.NewGuid().ToString();
         public required string Name { get; set; }
-        public required DateTime Date { get; set; } // todo: rename to date of trip
+        public required DateTime DateOfTrip { get; set; }
         public required DateTime ArrivalTime { get; set; }
         public required DateTime DepartureTime { get; set; }
         public required int DistanceInKilometers { get; set; }
@@ -20,6 +20,5 @@ namespace TrainAPI.Domain.Entities
 
         public required string FromStationId { get; set; }
         public Station FromStation { get; set; } = null!;
-
     }
 }
