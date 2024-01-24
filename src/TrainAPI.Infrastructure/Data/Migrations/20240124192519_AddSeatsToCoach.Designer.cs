@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using TrainAPI.Infrastructure.Data;
@@ -11,9 +12,11 @@ using TrainAPI.Infrastructure.Data;
 namespace TrainAPI.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20240124192519_AddSeatsToCoach")]
+    partial class AddSeatsToCoach
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -397,22 +400,15 @@ namespace TrainAPI.Infrastructure.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.OwnsMany("TrainAPI.Domain.Entities.Seat", "Seats", b1 =>
+                    b.OwnsOne("System.Collections.Generic.List<TrainAPI.Domain.Entities.Seat>", "Seats", b1 =>
                         {
                             b1.Property<string>("CoachId")
                                 .HasColumnType("text");
 
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
+                            b1.Property<int>("Capacity")
                                 .HasColumnType("integer");
 
-                            b1.Property<bool>("IsBooked")
-                                .HasColumnType("boolean");
-
-                            b1.Property<int>("SeatNumber")
-                                .HasColumnType("integer");
-
-                            b1.HasKey("CoachId", "Id");
+                            b1.HasKey("CoachId");
 
                             b1.ToTable("Coaches", "TrainDb");
 
@@ -422,23 +418,15 @@ namespace TrainAPI.Infrastructure.Data.Migrations
                                 .HasForeignKey("CoachId");
                         });
 
-                    b.OwnsMany("TrainAPI.Domain.Entities.TravellerPairs", "TravellerCategories", b1 =>
+                    b.OwnsOne("System.Collections.Generic.List<TrainAPI.Domain.Entities.TravellerPairs>", "TravellerCategories", b1 =>
                         {
                             b1.Property<string>("CoachId")
                                 .HasColumnType("text");
 
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
+                            b1.Property<int>("Capacity")
                                 .HasColumnType("integer");
 
-                            b1.Property<int>("Price")
-                                .HasColumnType("integer");
-
-                            b1.Property<string>("Type")
-                                .IsRequired()
-                                .HasColumnType("text");
-
-                            b1.HasKey("CoachId", "Id");
+                            b1.HasKey("CoachId");
 
                             b1.ToTable("Coaches", "TrainDb");
 
@@ -448,11 +436,13 @@ namespace TrainAPI.Infrastructure.Data.Migrations
                                 .HasForeignKey("CoachId");
                         });
 
-                    b.Navigation("Seats");
+                    b.Navigation("Seats")
+                        .IsRequired();
 
                     b.Navigation("Train");
 
-                    b.Navigation("TravellerCategories");
+                    b.Navigation("TravellerCategories")
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("TrainAPI.Domain.Entities.Trip", b =>

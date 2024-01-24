@@ -10,6 +10,7 @@ public class GetCoachResponse
     public required string Class { get; set; }
     public required int SeatCount { get; set; }
     public required int AvailableSeats { get; set; }
+    public required List<Seat> Seats { get; set; }
 
     public required List<TravellerPairs> TravellerCategories { get; set; }
 }

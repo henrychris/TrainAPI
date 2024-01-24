@@ -9,7 +9,6 @@ public class DataContext : IdentityDbContext<ApplicationUser>
 {
     public DataContext()
     {
-
     }
 
     public DataContext(DbContextOptions<DataContext> options) : base(options)
@@ -21,8 +20,9 @@ public class DataContext : IdentityDbContext<ApplicationUser>
         base.OnModelCreating(modelBuilder);
         modelBuilder.HasDefaultSchema("TrainDb");
 
-		modelBuilder.Entity<Coach>()
-        .OwnsOne(c => c.TravellerCategories, d => d.ToJson());
+        modelBuilder.Entity<Coach>()
+                    .OwnsMany(c => c.TravellerCategories, d => d.ToJson())
+                    .OwnsMany(c => c.Seats, d => d.ToJson());
     }
 
     public virtual DbSet<Station> Stations { get; set; } = null!;
