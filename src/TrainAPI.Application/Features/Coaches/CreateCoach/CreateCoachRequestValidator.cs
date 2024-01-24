@@ -27,11 +27,6 @@ public class CreateCoachRequestValidator : AbstractValidator<CreateCoachRequest>
             .WithMessage(Errors.Coach.InvalidSeatCount.Description)
             .WithErrorCode(Errors.Coach.InvalidSeatCount.Code);
 
-        RuleFor(x => x.AvailableSeats)
-            .GreaterThanOrEqualTo(0)
-            .WithMessage(Errors.Coach.InvalidAvailableSeats.Description)
-            .WithErrorCode(Errors.Coach.InvalidAvailableSeats.Code);
-
         RuleFor(x => x.TravellerCategories)
             .Must(HaveValidTravellerPairs)
             .WithMessage(Errors.Coach.InvalidTravellerPairs.Description)

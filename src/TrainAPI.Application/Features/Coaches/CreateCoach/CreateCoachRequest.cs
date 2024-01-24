@@ -16,7 +16,6 @@ public class CreateCoachRequest : IRequest<ErrorOr<CreateCoachResponse>>
     public string Name { get; set; } = string.Empty;
     public string Class { get; set; } = string.Empty;
     public int SeatCount { get; set; }
-    public int AvailableSeats { get; set; }
     public List<TravellerPairs> TravellerCategories { get; set; } = [];
     public string TrainId { get; set; } = string.Empty;
 }
@@ -47,7 +46,7 @@ public class CreateCoachRequestHandler(
             return SharedErrors<Train>.NotFound;
         }
 
-        Coach coach = CoachMapper.CreateCoach(request);
+        var coach = CoachMapper.CreateCoach(request);
         await coachService.CreateCoach(coach);
 
         logger.LogInformation("Coach created. Id: {id}.", coach.Id);

@@ -11,15 +11,17 @@ public static class CoachMapper
 {
     public static Coach CreateCoach(CreateCoachRequest request)
     {
-        return new Coach
+        var coach =  new Coach
         {
             Name = request.Name,
             Class = request.Class,
             SeatCount = request.SeatCount,
-            AvailableSeats = request.AvailableSeats,
             TravellerCategories = request.TravellerCategories,
             TrainId = request.TrainId
         };
+        
+        coach.InitializeSeats(request.SeatCount);
+        return coach;
     }
 
     public static CreateCoachResponse ToCreateCoachResponse(Coach coach)
@@ -36,6 +38,7 @@ public static class CoachMapper
             Class = coach.Class,
             SeatCount = coach.SeatCount,
             AvailableSeats = coach.AvailableSeats,
+            Seats = coach.Seats,
             TravellerCategories = coach.TravellerCategories
         };
     }
@@ -48,7 +51,6 @@ public static class CoachMapper
             Name = request.Name,
             Class = request.Class,
             SeatCount = request.SeatCount,
-            AvailableSeats = request.AvailableSeats,
             TravellerCategories = request.TravellerCategories,
             TrainId = request.TrainId
         };

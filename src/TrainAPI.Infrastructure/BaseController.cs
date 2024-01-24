@@ -10,7 +10,6 @@ using TrainAPI.Infrastructure.Filters;
 
 namespace TrainAPI.Infrastructure;
 
-[Authorize]
 [ApiController]
 [TypeFilter(typeof(CustomValidationFilter))]
 [Route("api/[controller]")]

@@ -22,7 +22,6 @@ public class CoachesController(IMediator mediator) : BaseController
 {
     [Authorize(Roles = Roles.ADMIN)]
     [HttpPost]
-    [AllowAnonymous]
     [Consumes(MediaTypeNames.Application.Json)]
     [ProducesResponseType(typeof(ApiErrorResponse), StatusCodes.Status400BadRequest)]
     [ProducesResponseType(typeof(ApiResponse<CreateCoachResponse>), StatusCodes.Status200OK)]
@@ -49,8 +48,7 @@ public class CoachesController(IMediator mediator) : BaseController
             _ => Ok(result.ToSuccessfulApiResponse()),
             ReturnErrorResponse);
     }
-
-    [Authorize(Roles = Roles.ADMIN)]
+    
     [HttpGet("all")]
     [ProducesResponseType(typeof(ApiResponse<PagedResponse<GetCoachResponse>>), StatusCodes.Status200OK)]
     public async Task<IActionResult> GetAllCoaches([FromQuery] GetAllCoachesRequest request)

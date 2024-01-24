@@ -16,8 +16,6 @@ public class UpdateCoachRequestDto
     public string? Name { get; set; }
     public string? Class { get; set; }
     public int? SeatCount { get; set; }
-    public int? AvailableSeats { get; set; }
-
     public List<TravellerPairs>? TravellerCategories { get; set; }
     public string? TrainId { get; set; }
 }
@@ -28,8 +26,6 @@ public class UpdateCoachRequest : IRequest<ErrorOr<Updated>>
     public string? Name { get; init; }
     public string? Class { get; init; }
     public int? SeatCount { get; init; }
-    public int? AvailableSeats { get; init; }
-
     public List<TravellerPairs>? TravellerCategories { get; init; }
     public string? TrainId { get; init; }
 }
@@ -72,7 +68,6 @@ public class UpdateCoachRequestHandler(
         coach.Name = request.Name ?? coach.Name;
         coach.Class = request.Class ?? coach.Class;
         coach.SeatCount = request.SeatCount ?? coach.SeatCount;
-        coach.AvailableSeats = request.AvailableSeats ?? coach.AvailableSeats;
         coach.TravellerCategories = request.TravellerCategories ?? coach.TravellerCategories;
         coach.TrainId = request.TrainId ?? coach.TrainId;
 

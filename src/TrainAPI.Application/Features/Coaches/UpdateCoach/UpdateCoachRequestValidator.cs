@@ -36,14 +36,6 @@ public class UpdateCoachRequestValidator : AbstractValidator<UpdateCoachRequest>
                 .WithErrorCode(Errors.Coach.InvalidSeatCount.Code);
         });
 
-        When(x => x.AvailableSeats is not null, () =>
-        {
-            RuleFor(x => x.AvailableSeats)
-                .GreaterThanOrEqualTo(0)
-                .WithMessage(Errors.Coach.InvalidAvailableSeats.Description)
-                .WithErrorCode(Errors.Coach.InvalidAvailableSeats.Code);
-        });
-
         When(x => x.TravellerCategories is not null, () =>
         {
             RuleFor(x => x.TravellerCategories)

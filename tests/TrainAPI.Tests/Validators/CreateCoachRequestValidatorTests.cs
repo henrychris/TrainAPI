@@ -11,7 +11,7 @@ namespace TrainAPI.Tests.Validators
     [TestFixture]
     public class CreateCoachRequestValidatorTests
     {
-        private CreateCoachRequestValidator _validator;
+        private CreateCoachRequestValidator? _validator;
         // write tests for CreateCoachRequestValidator
 
         [SetUp]
@@ -57,25 +57,6 @@ namespace TrainAPI.Tests.Validators
 
             var result = _validator.TestValidate(createCoach);
             result.ShouldNotHaveValidationErrorFor(x => x.SeatCount);
-        }
-
-        [Test]
-        public void WhenAvailableSeatsIsNegative_ReturnError()
-        {
-            var createCoach = new CreateCoachRequest { AvailableSeats = -1 };
-
-            var result = _validator.TestValidate(createCoach);
-            result.ShouldHaveValidationErrorFor(x => x.AvailableSeats);
-        }
-
-        [TestCase(0)]
-        [TestCase(1)]
-        public void WhenAvailableSeatsIsZeroOrPositive_ReturnNoError(int availableSeats)
-        {
-            var createCoach = new CreateCoachRequest { AvailableSeats = availableSeats };
-
-            var result = _validator.TestValidate(createCoach);
-            result.ShouldNotHaveValidationErrorFor(x => x.AvailableSeats);
         }
 
         [Test]

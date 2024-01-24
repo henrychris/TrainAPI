@@ -35,7 +35,6 @@ public class CoachControllerTests : IntegrationTest
             Name = "Henry Ihenacho Coach",
             Class = CoachClass.First.ToString(),
             SeatCount = 10,
-            AvailableSeats = 10,
             TravellerCategories =
             [
                 new TravellerPairs { Type = TravellerCategory.Adult.ToString(), Price = 20 },
@@ -45,7 +44,8 @@ public class CoachControllerTests : IntegrationTest
         });
 
         var response = await act.Content.ReadFromJsonAsync<ApiResponse<CreateCoachResponse>>();
-
+        var coach = await GetCoach(response.Data.CoachId);
+        
         // Assert
         act.EnsureSuccessStatusCode();
         act.StatusCode.Should().Be(HttpStatusCode.Created);
@@ -53,6 +53,9 @@ public class CoachControllerTests : IntegrationTest
         response!.Data.Should().NotBeNull();
         response.Data!.CoachId.Should().NotBeNull();
         response.Success.Should().BeTrue();
+
+        coach.AvailableSeats.Should().Be(10);
+        coach.Seats.Count.Should().Be(10);
     }
 
     [Test]
@@ -69,7 +72,6 @@ public class CoachControllerTests : IntegrationTest
             Name = "Henry Ihenacho Coach",
             Class = "Invalid class",
             SeatCount = 10,
-            AvailableSeats = 10,
             TravellerCategories =
             [
                 new TravellerPairs { Type = TravellerCategory.Adult.ToString(), Price = 20 },
@@ -97,7 +99,6 @@ public class CoachControllerTests : IntegrationTest
             Name = "Henry Ihenacho Coach",
             Class = CoachClass.First.ToString(),
             SeatCount = 10,
-            AvailableSeats = 10,
             TravellerCategories =
             [
                 new TravellerPairs { Type = TravellerCategory.Adult.ToString(), Price = 20 },
@@ -112,6 +113,6 @@ public class CoachControllerTests : IntegrationTest
         act.StatusCode.Should().Be(HttpStatusCode.NotFound);
         response!.Success.Should().BeFalse();
     }
-    
+
     // todo: remember to test validators separately.
 }

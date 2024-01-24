@@ -58,7 +58,9 @@ public class TrainsController(IMediator mediator) : BaseController
     {
         var result = await mediator.Send(new UpdateTrainRequest
         {
-            TrainId = id, Code = request.Code, Name = request.Name
+            TrainId = id,
+            Code = request.Code,
+            Name = request.Name
         });
         return result.Match(_ => NoContent(), ReturnErrorResponse);
     }

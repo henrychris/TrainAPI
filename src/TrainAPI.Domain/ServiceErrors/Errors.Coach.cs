@@ -15,7 +15,7 @@ public static partial class Errors
             Error.Validation("Coach.InvalidSeatCount", "Seat count must be at least 0.");
 
         public static Error InvalidAvailableSeats =>
-            Error.Validation("Coach.InvalidAvailableSeats", "Available seats must be at least 0.");
+            Error.Validation("Coach.InvalidAvailableSeats", "Available seats must be at less than, or the same amount as in SeatCount.");
 
         public static Error InvalidTravellerPairs => Error.Validation("Coach.InvalidTravellerPairs",
             "There must be at least one traveller of type 'Child' and one of type 'Adult'.");

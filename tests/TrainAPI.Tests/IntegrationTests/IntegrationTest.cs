@@ -10,6 +10,7 @@ using NUnit.Framework;
 using TrainAPI.Application.ApiResponses;
 using TrainAPI.Application.Features.Auth;
 using TrainAPI.Application.Features.Auth.Register;
+using TrainAPI.Application.Features.Coaches.GetSingleCoach;
 using TrainAPI.Application.Features.Stations.CreateStation;
 using TrainAPI.Application.Features.Trains.CreateTrain;
 using TrainAPI.Domain.Constants;
@@ -91,5 +92,12 @@ public class IntegrationTest
         var act = await TestClient.PostAsJsonAsync("Trains", request);
         var response = await act.Content.ReadFromJsonAsync<ApiResponse<CreateTrainResponse>>();
         return response!.Data!;
+    }
+
+    protected async Task<GetCoachResponse> GetCoach(string coachId)
+    {
+        var act = await TestClient.GetAsync($"Coaches/{coachId}");
+        var res = await act.Content.ReadFromJsonAsync<ApiResponse<GetCoachResponse>>();
+        return res!.Data!;
     }
 }
