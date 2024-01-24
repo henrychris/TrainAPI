@@ -85,7 +85,7 @@ public static class DatabaseConfig
     {
         foreach (var role in Roles.AllRoles)
         {
-            if (! await roleManager.RoleExistsAsync(role))
+            if (!await roleManager.RoleExistsAsync(role))
             {
                 await roleManager.CreateAsync(new IdentityRole(role));
                 Console.WriteLine($"Created role: {role}.");
