@@ -1,5 +1,3 @@
-using MediatR;
-
 using TrainAPI.Application.Features.Coaches.CreateCoach;
 using TrainAPI.Application.Features.Coaches.GetSingleCoach;
 using TrainAPI.Application.Features.Coaches.UpdateCoach;
@@ -19,7 +17,7 @@ public static class CoachMapper
             TravellerCategories = request.TravellerCategories,
             TrainId = request.TrainId
         };
-        
+
         coach.InitializeSeats(request.SeatCount);
         return coach;
     }

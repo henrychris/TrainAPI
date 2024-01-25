@@ -2,7 +2,6 @@ using System.Net.Mime;
 
 using ErrorOr;
 
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using TrainAPI.Application.ApiResponses;

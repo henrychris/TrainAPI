@@ -1,5 +1,6 @@
-﻿using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+
 using TrainAPI.Domain.Entities;
 
 #nullable disable

@@ -11,7 +11,6 @@ using TrainAPI.Application.Features.Trains.CreateTrain;
 using TrainAPI.Domain.Constants;
 using TrainAPI.Domain.Entities;
 using TrainAPI.Domain.Enums;
-using TrainAPI.Domain.ServiceErrors;
 
 namespace TrainAPI.Tests.IntegrationTests.Coaches;
 
@@ -45,7 +44,7 @@ public class CoachControllerTests : IntegrationTest
 
         var response = await act.Content.ReadFromJsonAsync<ApiResponse<CreateCoachResponse>>();
         var coach = await GetCoach(response.Data.CoachId);
-        
+
         // Assert
         act.EnsureSuccessStatusCode();
         act.StatusCode.Should().Be(HttpStatusCode.Created);
