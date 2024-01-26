@@ -165,6 +165,7 @@ public static class StartupConfig
         services.AddScoped<ITrainService, TrainService>();
         services.AddScoped<ITripService, TripService>();
         services.AddScoped<ICoachService, CoachService>();
+        services.AddScoped<IBookingService, BookingService>();
         services.AddSingleton(TimeProvider.System);
     }
 
