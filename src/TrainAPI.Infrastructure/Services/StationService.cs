@@ -36,8 +36,8 @@ public class StationService(DataContext context) : IStationService
 
     public async Task<(bool fromStationExists, bool toStationExists)> DoStationsExist(string fromStationId, string toStationId)
     {
-        var fromStationExists = await context.Stations.FindAsync(fromStationId) is null;
-        var toStationExists = await context.Stations.FindAsync(toStationId) is null;
+        var fromStationExists = await context.Stations.FindAsync(fromStationId) is not null;
+        var toStationExists = await context.Stations.FindAsync(toStationId) is not null;
 
         return (fromStationExists, toStationExists);
     }
