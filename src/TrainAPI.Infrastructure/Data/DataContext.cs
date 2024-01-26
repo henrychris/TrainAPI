@@ -26,6 +26,7 @@ public class DataContext : IdentityDbContext<ApplicationUser>
     }
 
     public virtual DbSet<Station> Stations { get; set; } = null!;
+    public virtual DbSet<Booking> Bookings { get; set; } = null!;
     public virtual DbSet<Train> Trains { get; set; } = null!;
     public virtual DbSet<Trip> Trips { get; set; } = null!;
     public virtual DbSet<Coach> Coaches { get; set; } = null!;
