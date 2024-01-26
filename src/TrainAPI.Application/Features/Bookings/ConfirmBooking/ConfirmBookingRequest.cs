@@ -1,5 +1,7 @@
 using ErrorOr;
 
+using Hangfire;
+
 using MediatR;
 
 using TrainAPI.Application.Contracts;
@@ -34,10 +36,15 @@ namespace TrainAPI.Application.Features.Bookings.ConfirmBooking
             {
                 return Errors.Booking.BookingAlreadyExpired;
             }
-
+            
             booking.IsConfirmed = true;
             await bookingService.UpdateBookingAsync(booking);
-
+            
+            if (booking.JobId is not null)
+            {
+                BackgroundJob.Delete(booking.JobId);
+            }
+            
             return BookingMapper.CreateConfirmBookingResponse(booking);
         }
     }
