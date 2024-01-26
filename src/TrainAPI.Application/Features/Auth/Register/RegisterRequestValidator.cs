@@ -18,6 +18,7 @@ public class RegisterRequestValidator : AbstractValidator<RegisterRequest>
 
         RuleFor(x => x.Role)
             .Must(x => Roles.AllRoles.Contains(x))
-            .WithMessage("These are the valid roles: " + string.Join(", ", Roles.AllRoles));
+            .WithMessage("These are the valid roles: " + string.Join(", ", Roles.AllRoles))
+            .WithErrorCode("RegisterRequest.InvalidRole");
     }
 }
