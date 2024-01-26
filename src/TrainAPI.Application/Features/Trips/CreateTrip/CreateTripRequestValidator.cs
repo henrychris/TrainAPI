@@ -45,6 +45,8 @@ public class CreateTripRequestValidator : AbstractValidator<CreateTripRequest>
             .WithMessage(Errors.Trip.ArrivalTimeBeforeDate.Description)
             .WithErrorCode(Errors.Trip.ArrivalTimeBeforeDate.Code);
 
+        // todo: arrival time should be before departure time, as that is when the train gets to its destination
+
         RuleFor(request => request.DepartureTime)
             .GreaterThan(request => request.DateOfTrip)
             .WithMessage(Errors.Trip.DepartureTimeBeforeDate.Description)

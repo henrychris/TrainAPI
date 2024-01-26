@@ -57,5 +57,9 @@ public static partial class Errors
         public static Error DepartureTimeBeforeArrivalTime => Error.Validation(
             code: "Trip.DepartureTimeBeforeArrivalTime",
             description: "DepartureTime must be after ArrivalTime.");
+
+        public static Error TripAlreadyDeparted => Error.Validation(
+            code: "Trip.TripAlreadyDeparted",
+            description: "The train has already departed.");
     }
 }

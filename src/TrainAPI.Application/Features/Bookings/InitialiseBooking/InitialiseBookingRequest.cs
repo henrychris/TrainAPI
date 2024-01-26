@@ -47,6 +47,12 @@ public class
             return SharedErrors<Trip>.NotFound;
         }
 
+        if (trip.DepartureTime < DateTime.Now)
+        {
+            logger.LogError("The trip has already departed. Id: {id}", request.TripId);
+            return Errors.Trip.TripAlreadyDeparted;
+        }
+
         var areSeatsValid = await ValidatePassengerSeats(request.Passengers);
         if (areSeatsValid.IsError)
         {
@@ -54,10 +60,8 @@ public class
             return areSeatsValid.Errors;
         }
 
-
         Booking booking = BookingMapper.CreateBookingResponse(request);
         await bookingService.CreateBooking(booking);
-
         await bookingService.TemporarilyReserveSeats(request.Passengers, booking.Id);
 
         logger.LogInformation("Successfully created a booking. {booking}", booking);

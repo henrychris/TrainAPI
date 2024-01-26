@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using TrainAPI.Application.ApiResponses;
 using TrainAPI.Application.Extensions;
+using TrainAPI.Application.Features.Bookings.ConfirmBooking;
 using TrainAPI.Application.Features.Bookings.GetSingleBooking;
 using TrainAPI.Application.Features.Bookings.InitialiseBooking;
 using TrainAPI.Domain.Constants;
@@ -43,6 +44,18 @@ public class BookingController(IMediator mediator) : BaseController
 
         // If successful, return the event data in an ApiResponse.
         // If an error occurs, return an error response using the ReturnErrorResponse method.
+        return result.Match(
+            _ => Ok(result.ToSuccessfulApiResponse()),
+            ReturnErrorResponse);
+    }
+
+    [Authorize(Roles = $"{Roles.USER}, {Roles.ADMIN}")]
+    [HttpPost("{id}/confirm")]
+    [ProducesResponseType(typeof(ApiResponse<GetBookingResponse>), StatusCodes.Status200OK)]
+    public async Task<IActionResult> ConfirmBooking(string id)
+    {
+        var result = await mediator.Send(new ConfirmBookingRequest { BookingId = id });
+
         return result.Match(
             _ => Ok(result.ToSuccessfulApiResponse()),
             ReturnErrorResponse);
