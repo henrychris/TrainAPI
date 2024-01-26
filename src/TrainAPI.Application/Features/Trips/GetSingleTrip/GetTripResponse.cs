@@ -2,6 +2,7 @@ namespace TrainAPI.Application.Features.Trips.GetSingleTrip;
 
 public class GetTripResponse
 {
+    public required string TripId { get; init; }
     public required string Name { get; init; }
     public required DateTime DateOfTrip { get; init; }
     public required DateTime ArrivalTime { get; init; }

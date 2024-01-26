@@ -31,6 +31,7 @@ public static class TripMapper
     {
         return new GetTripResponse
         {
+            TripId = trip.Id,
             Name = trip.Name,
             DateOfTrip = trip.DateOfTrip,
             ArrivalTime = trip.ArrivalTime,
