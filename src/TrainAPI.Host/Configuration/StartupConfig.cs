@@ -4,6 +4,9 @@ using System.Text.Json.Serialization;
 
 using FluentValidation;
 
+using Hangfire;
+using Hangfire.PostgreSql;
+
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -187,5 +190,14 @@ public static class StartupConfig
         var assemblyToScan = typeof(LoginRequest).Assembly;
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(assemblyToScan));
         services.AddValidatorsFromAssembly(assemblyToScan);
+    }
+
+    internal static void AddHangfire(this WebApplicationBuilder builder)
+    {
+        builder.Services.AddHangfire(x => x.UsePostgreSqlStorage(x =>
+        {
+            x.UseNpgsqlConnection(builder.Configuration.GetSection("DatabaseSettings:HangfireConnectionString").Value);
+        }));
+        builder.Services.AddHangfireServer();
     }
 }

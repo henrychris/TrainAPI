@@ -1,3 +1,5 @@
+using Hangfire;
+
 using TrainAPI.Infrastructure.Middleware;
 
 namespace TrainAPI.Host.Configuration;
@@ -9,6 +11,7 @@ public static class MiddlewareConfig
         app.RegisterSwagger();
         app.RegisterMiddleware();
         await app.SeedDatabase();
+        app.UseHangfireDashboard();
     }
 
     private static void RegisterSwagger(this WebApplication app)
