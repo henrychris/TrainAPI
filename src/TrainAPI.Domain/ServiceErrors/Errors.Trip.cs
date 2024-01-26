@@ -54,9 +54,9 @@ public static partial class Errors
             code: "Trip.DepartureTimeBeforeDate",
             description: "DepartureTime must be after DateOfTrip.");
 
-        public static Error DepartureTimeBeforeArrivalTime => Error.Validation(
+        public static Error DepartureTimeAfterArrivalTime => Error.Validation(
             code: "Trip.DepartureTimeBeforeArrivalTime",
-            description: "DepartureTime must be after ArrivalTime.");
+            description: "DepartureTime must be before ArrivalTime.");
 
         public static Error TripAlreadyDeparted => Error.Validation(
             code: "Trip.TripAlreadyDeparted",

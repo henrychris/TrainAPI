@@ -68,9 +68,9 @@ public class UpdateTripRequestValidator : AbstractValidator<UpdateTripRequest>
                 !.GreaterThan(request => request.DateOfTrip)
                  .WithMessage(Errors.Trip.DepartureTimeBeforeDate.Description)
                  .WithErrorCode(Errors.Trip.DepartureTimeBeforeDate.Code)
-                 .GreaterThan(request => request.ArrivalTime)
-                 .WithMessage(Errors.Trip.DepartureTimeBeforeArrivalTime.Description)
-                 .WithErrorCode(Errors.Trip.DepartureTimeBeforeArrivalTime.Code);
+                 .LessThan(request => request.ArrivalTime)
+                 .WithMessage(Errors.Trip.DepartureTimeAfterArrivalTime.Description)
+                 .WithErrorCode(Errors.Trip.DepartureTimeAfterArrivalTime.Code);
         });
     }
 }
