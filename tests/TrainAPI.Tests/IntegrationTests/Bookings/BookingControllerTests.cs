@@ -94,5 +94,37 @@ namespace TrainAPI.Tests.IntegrationTests.Bookings
             response.Data!.BookingId.Should().NotBeNull();
             response.Success.Should().BeTrue();
         }
+
+        [Test]
+        public async Task CreateBooking_InvalidRequest_ReturnsHttpBadRequest()
+        {
+            // Arrange
+            await AuthenticateAsync(Roles.ADMIN);
+
+            // Act
+            var act = await TestClient.PostAsJsonAsync("Booking", new InitialiseBookingRequest
+            {
+                Name = "Henry Ihenacho",
+                ContactInfo = new ContactDetails { EmailAddress = "testemail.com", PhoneNumber = "1234567890" },
+                TripId = "123",
+                Passengers =
+                [
+                    new()
+                    {
+                        FullName = "Chris Ihenacho",
+                        SeatNumber = 1,
+                        CoachId = "123",
+                        EmailAddress = "testemail.com",
+                        PhoneNumber = "1234567890"
+                    }
+                ]
+            });
+
+            var response = await act.Content.ReadFromJsonAsync<ApiErrorResponse>();
+
+            // Assert
+            act.StatusCode.Should().Be(HttpStatusCode.BadRequest);
+            response!.Success.Should().BeFalse();
+        }
     }
 }
