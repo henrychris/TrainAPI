@@ -10,9 +10,12 @@ using NUnit.Framework;
 using TrainAPI.Application.ApiResponses;
 using TrainAPI.Application.Features.Auth;
 using TrainAPI.Application.Features.Auth.Register;
+using TrainAPI.Application.Features.Coaches.CreateCoach;
 using TrainAPI.Application.Features.Coaches.GetSingleCoach;
 using TrainAPI.Application.Features.Stations.CreateStation;
 using TrainAPI.Application.Features.Trains.CreateTrain;
+using TrainAPI.Application.Features.Trips.CreateTrip;
+using TrainAPI.Application.Features.Trips.GetSingleTrip;
 using TrainAPI.Domain.Constants;
 using TrainAPI.Host;
 using TrainAPI.Infrastructure.Data;
@@ -33,7 +36,7 @@ public class IntegrationTest
             {
                 builder.ConfigureServices(services =>
                 {
-                    // remove dataContext 
+                    // remove dataContext
                     var descriptorsToRemove = services.Where(
                         d => d.ServiceType == typeof(DbContextOptions<DataContext>)).ToList();
 
@@ -99,5 +102,19 @@ public class IntegrationTest
         var act = await TestClient.GetAsync($"Coaches/{coachId}");
         var res = await act.Content.ReadFromJsonAsync<ApiResponse<GetCoachResponse>>();
         return res!.Data!;
+    }
+
+    protected async Task<CreateTripResponse> CreateTrip(CreateTripRequest request)
+    {
+        var act = await TestClient.PostAsJsonAsync("Trips", request);
+        var response = await act.Content.ReadFromJsonAsync<ApiResponse<CreateTripResponse>>();
+        return response!.Data!;
+    }
+
+    protected async Task<CreateCoachResponse> CreateCoach(CreateCoachRequest request)
+    {
+        var act = await TestClient.PostAsJsonAsync("Coaches", request);
+        var response = await act.Content.ReadFromJsonAsync<ApiResponse<CreateCoachResponse>>();
+        return response!.Data!;
     }
 }
