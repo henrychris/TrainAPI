@@ -1,0 +1,26 @@
+meta {
+  name: register
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://{{baseUrl}}api/auth/register
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "firstName": "Henry",
+    "lastName": "Ihenacho",
+    "emailAddress": "henrychris2003@gmail.com",
+    "password": "testPassword123@",
+    "role": "Admin"
+  }
+}
+
+script:post-response {
+  let data = res.body;
+  bru.setEnvVar("token", data.data.accessToken);
+}

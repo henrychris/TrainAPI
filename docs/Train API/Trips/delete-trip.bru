@@ -1,0 +1,11 @@
+meta {
+  name: delete-trip
+  type: http
+  seq: 3
+}
+
+delete {
+  url: http://{{baseUrl}}api/trips/{{lastTripId}}
+  body: none
+  auth: none
+}

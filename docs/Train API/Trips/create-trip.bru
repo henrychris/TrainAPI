@@ -1,0 +1,29 @@
+meta {
+  name: create-trip
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://{{baseUrl}}api/trips
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "",
+    "dateOfTrip": "",
+    "arrivalTime": "",
+    "departureTime": "",
+    "distanceInKilometers": "",
+    "trainId": {{lastTrainId}},
+    "toStationId": "",
+    "fromStationId": {{lastStationId}}
+  }
+}
+
+script:post-response {
+  let data = res.body;
+  bru.setEnvVar("lastTripId", data.data.tripId);
+}

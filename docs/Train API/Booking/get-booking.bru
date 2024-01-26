@@ -1,0 +1,11 @@
+meta {
+  name: get-booking
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://{{baseUrl}}api/booking/{{lastBookingId}}
+  body: none
+  auth: none
+}

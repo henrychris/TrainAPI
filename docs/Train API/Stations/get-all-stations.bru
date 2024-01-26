@@ -1,0 +1,18 @@
+meta {
+  name: get-all-stations
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://{{baseUrl}}api/stations/all
+  body: none
+  auth: none
+}
+
+query {
+  ~Name: 
+  ~Code: 
+  ~PageNumber: 
+  ~PageSize: 
+}

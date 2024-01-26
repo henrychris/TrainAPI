@@ -1,0 +1,11 @@
+meta {
+  name: delete-train
+  type: http
+  seq: 4
+}
+
+delete {
+  url: http://{{baseUrl}}api/trains/{{lastTrainId}}
+  body: none
+  auth: none
+}

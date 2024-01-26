@@ -1,0 +1,11 @@
+meta {
+  name: get-station
+  type: http
+  seq: 2
+}
+
+get {
+  url: http://{{baseUrl}}api/stations/{{lastStationId}}
+  body: none
+  auth: none
+}

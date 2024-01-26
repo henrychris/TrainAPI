@@ -1,0 +1,9 @@
+{
+  "version": "1",
+  "name": "Train API",
+  "type": "collection",
+  "presets": {
+    "requestType": "http",
+    "requestUrl": "http://localhost:5016/"
+  }
+}

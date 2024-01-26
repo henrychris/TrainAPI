@@ -1,0 +1,24 @@
+meta {
+  name: update-trip
+  type: http
+  seq: 4
+}
+
+put {
+  url: http://{{baseUrl}}api/trips/{{lastTripId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "dateOfTrip": "",
+    "arrivalTime": "",
+    "departureTime": "",
+    "name": "",
+    "trainId": "",
+    "toStationId": "",
+    "fromStationId": "",
+    "distanceInKilometers": ""
+  }
+}

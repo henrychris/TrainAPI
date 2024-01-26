@@ -1,0 +1,21 @@
+meta {
+  name: update-coach
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://{{baseUrl}}api/coaches/{{lastCoachId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "",
+    "class": "",
+    "seatCount": "",
+    "travellerCategories": [],
+    "trainId": ""
+  }
+}

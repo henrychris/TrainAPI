@@ -1,0 +1,18 @@
+meta {
+  name: update-train
+  type: http
+  seq: 3
+}
+
+put {
+  url: http://{{baseUrl}}api/trains/{{lastTrainId}}
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "",
+    "code": ""
+  }
+}

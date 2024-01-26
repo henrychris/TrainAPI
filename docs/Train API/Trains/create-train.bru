@@ -1,0 +1,23 @@
+meta {
+  name: create-train
+  type: http
+  seq: 1
+}
+
+post {
+  url: http://{{baseUrl}}api/trains
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Henry Ihenacho Train",
+    "code": "HIT"
+  }
+}
+
+script:post-response {
+  let data = res.body;
+  bru.setEnvVar("lastTrainId", data.data.trainId);
+}

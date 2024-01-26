@@ -1,0 +1,11 @@
+meta {
+  name: delete-coach
+  type: http
+  seq: 4
+}
+
+delete {
+  url: http://{{baseUrl}}api/coaches/{{lastCoachId}}
+  body: none
+  auth: none
+}

@@ -1,0 +1,11 @@
+meta {
+  name: delete-station
+  type: http
+  seq: 4
+}
+
+delete {
+  url: http://{{baseUrl}}api/stations/{{lastStationId}}
+  body: none
+  auth: none
+}

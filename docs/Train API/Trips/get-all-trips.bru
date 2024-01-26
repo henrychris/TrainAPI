@@ -1,0 +1,20 @@
+meta {
+  name: get-all-trips
+  type: http
+  seq: 5
+}
+
+get {
+  url: http://{{baseUrl}}api/trips/all
+  body: none
+  auth: none
+}
+
+query {
+  ~Name: 
+  ~DateOfTrip: 
+  ~ToStationId: 
+  ~FromStationId: 
+  ~PageNumber: 
+  ~PageSize: 
+}
