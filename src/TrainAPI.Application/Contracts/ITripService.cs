@@ -8,7 +8,7 @@ public interface ITripService
     Task CreateTrip(Trip trip);
 
     Task<bool> AreTripsClashing(CreateTripRequest request);
-    Task<Trip?> GetTrip(string requestTripId);
+    Task<Trip?> GetTrip(string tripId);
     Task DeleteTrip(Trip trip);
     IQueryable<Trip> GetQueryable();
     Task UpdateTrip(Trip trip);
