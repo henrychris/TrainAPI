@@ -1,5 +1,8 @@
+using Hangfire;
+
 using TrainAPI.Application.Contracts;
 using TrainAPI.Domain.Entities;
+using TrainAPI.Domain.Entities.Other;
 using TrainAPI.Infrastructure.Data;
 
 namespace TrainAPI.Infrastructure.Services;
@@ -36,7 +39,7 @@ public class BookingService(DataContext context) : IBookingService
 	/// </summary>
 	/// <param name="passengers"></param>
 	/// <returns></returns>
-	public async Task TemporarilyReserveSeats(List<Passenger> passengers)
+	public async Task TemporarilyReserveSeats(List<Passenger> passengers, string bookingId)
 	{
 		foreach (var passenger in passengers)
 		{
@@ -55,9 +58,34 @@ public class BookingService(DataContext context) : IBookingService
 			seat.IsBooked = true;
 			context.Coaches.Update(coach);
 
-			// todo: add a hangfire job to unreserve the seat after 10 minutes
+			BackgroundJob.Schedule(() => UnreserveSeat(new UnreserveSeatRequest
+			{
+				BookingId = bookingId,
+				CoachId = coach.Id,
+				Seat = seat
+			}), TimeSpan.FromMinutes(10));
 		}
 
 		await context.SaveChangesAsync();
 	}
+
+	private void UnreserveSeat(UnreserveSeatRequest request)
+	{
+		var coach = context.Coaches.Find(request.CoachId);
+		if (coach is null)
+		{
+			return;
+		}
+
+		var seat = coach.Seats.FirstOrDefault(s => s.SeatNumber == request.Seat.SeatNumber);
+		if (seat is null)
+		{
+			return;
+		}
+		seat.IsBooked = false;
+
+		context.Coaches.Update(coach);
+		context.SaveChanges();
+	}
+
 }

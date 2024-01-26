@@ -54,10 +54,11 @@ public class
             return areSeatsValid.Errors;
         }
 
-        await bookingService.TemporarilyReserveSeats(request.Passengers);
 
         Booking booking = BookingMapper.CreateBookingResponse(request);
         await bookingService.CreateBooking(booking);
+
+        await bookingService.TemporarilyReserveSeats(request.Passengers, booking.Id);
 
         logger.LogInformation("Successfully created a booking. {booking}", booking);
         return BookingMapper.CreateBookingResponse(booking);
