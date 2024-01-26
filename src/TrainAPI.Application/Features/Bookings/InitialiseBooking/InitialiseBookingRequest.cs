@@ -47,7 +47,7 @@ public class
             return SharedErrors<Trip>.NotFound;
         }
 
-        if (trip.DepartureTime < DateTime.Now)
+        if (trip.DepartureTime < DateTime.UtcNow)
         {
             logger.LogError("The trip has already departed. Id: {id}", request.TripId);
             return Errors.Trip.TripAlreadyDeparted;
@@ -77,8 +77,8 @@ public class
             var seatNo = passenger.SeatNumber;
             var coachId = passenger.CoachId;
 
-            bool isSeatAvailable = await bookingService.IsSeatAvailable(seatNo, coachId);
-            if (!isSeatAvailable)
+            bool isSeatBooked = await bookingService.IsSeatBooked(seatNo, coachId);
+            if (isSeatBooked)
             {
                 errors.Add(Error.Validation(
                     code: "Booking.SeatNotAvailable",

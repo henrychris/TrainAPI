@@ -6,7 +6,7 @@ public interface IBookingService
 {
     Task CreateBooking(Booking booking);
     Task<Booking?> GetBookingAsync(string bookingId);
-    Task<bool> IsSeatAvailable(int seatNo, string coachId);
+    Task<bool> IsSeatBooked(int seatNo, string coachId);
     Task TemporarilyReserveSeats(List<Passenger> passengers, string bookingId);
     Task UpdateBookingAsync(Booking booking);
 

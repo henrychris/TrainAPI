@@ -18,7 +18,7 @@ public class BookingService(DataContext context, ILogger<BookingService> logger)
 		await context.SaveChangesAsync();
 	}
 
-	public async Task<bool> IsSeatAvailable(int seatNo, string coachId)
+	public async Task<bool> IsSeatBooked(int seatNo, string coachId)
 	{
 		var coach = await context.Coaches.FindAsync(coachId);
 		if (coach is null)
@@ -89,7 +89,8 @@ public class BookingService(DataContext context, ILogger<BookingService> logger)
 		await context.SaveChangesAsync();
 	}
 
-	private void UnreserveSeat(UnreserveSeatRequest request)
+    // must be public for Hangfire
+	public void UnreserveSeat(UnreserveSeatRequest request)
 	{
 		// log seats being unreserved
 		logger.LogInformation("Unreserving seats for booking {id}.", request.BookingId);
